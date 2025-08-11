@@ -24,6 +24,10 @@ const userRouter = require("./routes/user.js");
 
 const dbUrl = process.env.ATLASDB_URL;
 
+async function main() {
+  await mongoose.connect(dbUrl);
+}
+
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
@@ -88,9 +92,7 @@ main()
     console.log(err);
   });
 
-async function main() {
-  await mongoose.connect(dbUrl);
-}
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
