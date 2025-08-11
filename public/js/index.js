@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   searchBtn.addEventListener("click", filterListings);
-  searchBox.addEventListener("input", filterListings);
+  // searchBox.addEventListener("input", filterListings);
 });
 
 
