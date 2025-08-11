@@ -49,25 +49,30 @@ filters.forEach((filter) => {
 
 // Search Bar
 
-const searchInput = document.querySelector(".search-input");
-const searchBtn = document.querySelector(".search-btn");
+document.addEventListener("DOMContentLoaded", () => {
+  const searchBox = document.getElementById("searchBox");
+  const searchBtn = document.getElementById("searchBtn");
+  const cards = document.querySelectorAll(".listing-link"); 
 
-searchBtn.addEventListener("click", (e) => {
-  const filter = searchInput.value.trim().toLowerCase();
-  flag = false;
+  const filterListings = () => {
+    const query = searchBox.value.trim().toLowerCase();
+    let found = false;
+    cards.forEach(card => {
+      const title = card.querySelector(".listing-title").textContent.toLowerCase();
+      if (title.includes(query)) {
+        card.style.display = "inline";
+        found = true;
+      } else {
+        card.style.display = "none";
+      }
+    });
+    document.getElementById("no-result").style.display = found ? "none" : "block";
+  };
 
-  links.forEach((link) => {
-    let listingTitle = link.querySelector(".listing-title");
-    let title = listingTitle.textContent.trim().toLowerCase();
-    if (title.startsWith(filter)) {
-      link.style.display = "inline";
-      flag = true;
-    } else {
-      link.style.display = "none";
-    }
-  });
-  noResult.style.display = flag ? "none" : "inline";
+  searchBtn.addEventListener("click", filterListings);
+  searchBox.addEventListener("input", filterListings);
 });
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const navCollapse = document.getElementById('mainNav');
